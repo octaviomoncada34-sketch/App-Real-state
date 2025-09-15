@@ -1,10 +1,10 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useEffect } from "react";
+import { useState, useTransition } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,12 +20,6 @@ const formSchema = z.object({
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
 });
 
-const initialState = {
-  message: "",
-  errors: {},
-  status: "",
-};
-
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
@@ -38,7 +32,7 @@ function SubmitButton() {
 
 export function ContactForm({ propertyId }: { propertyId: string }) {
   const { toast } = useToast();
-  const [state, formAction] = useFormState(submitContactForm, initialState);
+  const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -49,26 +43,36 @@ export function ContactForm({ propertyId }: { propertyId: string }) {
     },
   });
 
-  useEffect(() => {
-    if (state?.status === "success") {
-      toast({
-        title: "Success!",
-        description: state.message,
-      });
-      form.reset();
-    } else if (state?.status === "error") {
-      toast({
-        title: "Error",
-        description: state.message,
-        variant: "destructive",
-      });
-    }
-  }, [state, toast, form]);
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    startTransition(async () => {
+      const formData = new FormData();
+      formData.append('name', values.name);
+      formData.append('email', values.email);
+      formData.append('message', values.message);
+      formData.append('propertyId', propertyId);
+
+      // Passing null for prevState as we are not using useFormState
+      const state = await submitContactForm(null, formData);
+
+      if (state?.status === "success") {
+        toast({
+          title: "Success!",
+          description: state.message,
+        });
+        form.reset();
+      } else if (state?.status === "error") {
+        toast({
+          title: "Error",
+          description: state.message,
+          variant: "destructive",
+        });
+      }
+    });
+  };
 
   return (
     <Form {...form}>
-      <form action={formAction} className="space-y-4">
-        <input type="hidden" name="propertyId" value={propertyId} />
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="name"
@@ -112,7 +116,10 @@ export function ContactForm({ propertyId }: { propertyId: string }) {
             </FormItem>
           )}
         />
-        <SubmitButton />
+        <Button type="submit" disabled={isPending} className="w-full">
+          {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+          Send Inquiry
+        </Button>
       </form>
     </Form>
   );
