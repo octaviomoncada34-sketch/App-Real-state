@@ -3,7 +3,7 @@ import type { Property, Owner } from './definitions';
 export const OWNERS: Owner[] = [
   {
     idOwner: 'owner1',
-    name: 'John Doe',
+    name: 'Alexander Moncada',
     address: '123 Main St, Anytown, USA',
     photo: 'https://picsum.photos/seed/owner1/100/100',
     birthday: '1980-05-15',

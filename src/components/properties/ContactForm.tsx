@@ -80,7 +80,7 @@ export function ContactForm({ propertyId }: { propertyId: string }) {
             <FormItem>
               <FormLabel>Your Name</FormLabel>
               <FormControl>
-                <Input placeholder="John Doe" {...field} />
+                <Input placeholder="Alexander Moncada" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
