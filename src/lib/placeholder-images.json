@@ -1,3 +1,47 @@
+
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "prop1",
+      "description": "Modern Downtown Apartment",
+      "imageUrl": "https://picsum.photos/seed/prop1/800/600",
+      "imageHint": "modern apartment"
+    },
+    {
+      "id": "prop2",
+      "description": "Spacious Suburban House",
+      "imageUrl": "https://picsum.photos/seed/prop2/800/600",
+      "imageHint": "suburban house"
+    },
+    {
+      "id": "prop3",
+      "description": "Chic Industrial Loft",
+      "imageUrl": "https://picsum.photos/seed/prop3/800/600",
+      "imageHint": "city loft"
+    },
+    {
+      "id": "prop4",
+      "description": "Luxury Beachfront Villa",
+      "imageUrl": "https://picsum.photos/seed/prop4/800/600",
+      "imageHint": "beachfront villa"
+    },
+    {
+      "id": "prop5",
+      "description": "Cozy Countryside Cottage",
+      "imageUrl": "https://picsum.photos/seed/prop5/800/600",
+      "imageHint": "cozy cottage"
+    },
+    {
+      "id": "owner1",
+      "description": "Photo of John Doe",
+      "imageUrl": "https://picsum.photos/seed/owner1/100/100",
+      "imageHint": "man portrait"
+    },
+    {
+      "id": "owner2",
+      "description": "Photo of Jane Smith",
+      "imageUrl": "https://picsum.photos/seed/owner2/100/100",
+      "imageHint": "woman portrait"
+    }
+  ]
 }
