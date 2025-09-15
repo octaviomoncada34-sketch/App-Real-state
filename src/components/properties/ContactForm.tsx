@@ -89,7 +89,7 @@ export function ContactForm({ propertyId }: { propertyId: string }) {
             <FormItem>
               <FormLabel>Your Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="you@example.com" {...field} />
+                <Input type="email" placeholder="at1039197@gmail.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
