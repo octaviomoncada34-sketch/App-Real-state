@@ -5,7 +5,7 @@ import { Toaster } from '@/components/ui/toaster';
 import Header from '@/components/layout/Header';
 
 export const metadata: Metadata = {
-  title: 'ArrendApp',
+  title: 'Real State',
   description: 'Find your next rental property with ease.',
 };
 
